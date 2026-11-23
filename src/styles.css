@@ -1,0 +1,205 @@
+:root {
+  color-scheme: dark;
+  --bg: #14161a;
+  --panel: #1d2026;
+  --panel-border: #2f3440;
+  --text: #e8eaf0;
+  --muted: #9aa1af;
+  --accent: #7aa2f7;
+  --accent-strong: #4f7fe8;
+  --danger: #e5534b;
+  --ok: #57c287;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  line-height: 1.45;
+}
+
+#app {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h1 {
+  font-size: 1.35rem;
+  margin: 8px 0;
+}
+
+#top {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 140px;
+}
+
+.field-grow {
+  flex: 1 1 320px;
+}
+
+.field-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+input[type='text'],
+input[type='number'],
+select,
+textarea {
+  background: #101318;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font: inherit;
+}
+
+input[type='range'] {
+  accent-color: var(--accent);
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+input[type='file'] {
+  font-size: 0.85rem;
+}
+
+.actions {
+  gap: 8px;
+}
+
+.button {
+  background: var(--panel-border);
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 8px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.button:hover {
+  border-color: var(--accent);
+}
+
+.button-primary {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: #fff;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+#export-row,
+.row {
+  align-items: flex-end;
+}
+
+#status {
+  margin: 0;
+  padding: 10px;
+  border-radius: 6px;
+  background: #10131a;
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  min-height: 1.4em;
+}
+
+#controls {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+#controls summary {
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.panels {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.panel h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.control label {
+  min-width: 140px;
+}
+
+.control .value {
+  min-width: 60px;
+  text-align: right;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .control {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .control label {
+    min-width: 0;
+  }
+
+  .control .value {
+    text-align: left;
+  }
+}
