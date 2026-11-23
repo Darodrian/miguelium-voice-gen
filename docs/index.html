@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animalese Voice Gen</title>
+    <script type="module" crossorigin src="./assets/index-CR_WqLMJ.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-B3PNbGMo.css">
+  </head>
+  <body>
+    <div id="app">
+      <h1>Animalese Voice Gen</h1>
+      <section id="top">
+        <div class="row">
+          <label class="field" for="preset">
+            <span class="field-label">Preset</span>
+            <select id="preset">
+              <option value="miguelium">Miguelium</option>
+              <option value="ms-rowlet">Ms. Rowlet</option>
+              <option value="custom">Custom</option>
+            </select>
+          </label>
+          <label class="field" for="language">
+            <span class="field-label">Language</span>
+            <select id="language">
+              <option value="english">English</option>
+              <option value="japanese">Japanese</option>
+            </select>
+          </label>
+          <button id="reroll" type="button" class="button">🎲 Re-roll</button>
+          <div class="preset-actions">
+            <button id="preset-add" type="button" class="button">Add preset</button>
+            <button id="preset-rename" type="button" class="button">Rename preset</button>
+            <button id="preset-delete" type="button" class="button">Delete preset</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="field field-grow" for="text">
+            <span class="field-label">Text</span>
+            <textarea id="text" rows="6" placeholder="Type an animalese line…"></textarea>
+          </label>
+          <div class="row actions">
+            <button id="play" type="button" class="button button-primary">Play</button>
+            <button id="stop" type="button" class="button" disabled>Stop</button>
+          </div>
+        </div>
+
+        <div class="row export-row">
+          <label class="field" for="format">
+            <span class="field-label">Format</span>
+            <select id="format">
+              <option value="mp3">MP3</option>
+              <option value="ogg">OGG</option>
+            </select>
+          </label>
+          <label class="field" for="bitrate">
+            <span class="field-label">Bitrate (kbps)</span>
+            <input id="bitrate" type="number" min="32" max="320" step="32" value="128" />
+          </label>
+          <label class="field" for="quality">
+            <span class="field-label">Quality</span>
+            <input id="quality" type="number" min="0" max="10" step="1" value="5" />
+          </label>
+          <button id="save" type="button" class="button">Save clip</button>
+        </div>
+        <p id="status" role="status">Ready.</p>
+      </section>
+
+      <details id="controls">
+        <summary>Voice, timing, sprite &amp; engine controls</summary>
+        <div class="panels">
+          <section class="panel">
+            <h3>Voice</h3>
+            <div class="control">
+              <label for="voice-pitch">Pitch</label>
+              <input id="voice-pitch" type="range" min="0.05" max="4" step="0.01" value="0.85" />
+              <span class="value" id="voice-pitch-value">0.85</span>
+            </div>
+            <div class="control">
+              <label for="voice-speed">Speed</label>
+              <input id="voice-speed" type="range" min="0.1" max="6" step="0.1" value="3.9" />
+              <span class="value" id="voice-speed-value">3.9</span>
+            </div>
+            <div class="control">
+              <label for="voice-randomness">Randomness</label>
+              <input id="voice-randomness" type="range" min="0" max="1" step="0.01" value="0.1" />
+              <span class="value" id="voice-randomness-value">0.1</span>
+            </div>
+            <div class="control">
+              <label for="voice-melody-rate">Melody rate</label>
+              <input id="voice-melody-rate" type="range" min="0" max="1" step="0.005" value="0.055" />
+              <span class="value" id="voice-melody-rate-value">0.055</span>
+            </div>
+            <div class="control">
+              <label for="voice-melody-amplitude">Melody amplitude</label>
+              <input id="voice-melody-amplitude" type="range" min="0" max="1" step="0.005" value="0.1" />
+              <span class="value" id="voice-melody-amplitude-value">0.1</span>
+            </div>
+          </section>
+          <section class="panel">
+            <h3>Timing</h3>
+            <div class="control">
+              <label for="timing-space-delay">Space delay</label>
+              <input id="timing-space-delay" type="range" min="0" max="5" step="0.005" value="0.035" />
+              <span class="value" id="timing-space-delay-value">0.035</span>
+            </div>
+            <div class="control">
+              <label for="timing-punctuation-delay">Punctuation delay</label>
+              <input id="timing-punctuation-delay" type="range" min="0" max="10" step="0.05" value="0.3" />
+              <span class="value" id="timing-punctuation-delay-value">0.3</span>
+            </div>
+            <label class="field" for="timing-punctuations">Punctuations</label>
+            <input id="timing-punctuations" type="text" value=". , ! ? ' ( ) ~ 。 、 ！ ？ っ ッ ー" />
+          </section>
+          <section class="panel">
+            <h3>Sprite &amp; engine</h3>
+            <div class="control">
+              <label for="sampler-max-retries">Max retries</label>
+              <input id="sampler-max-retries" type="number" min="0" max="10" step="1" value="3" />
+            </div>
+            <div class="control">
+              <label for="sampler-silence-threshold">Silence threshold</label>
+              <input id="sampler-silence-threshold" type="range" min="0" max="1" step="0.01" value="0.01" />
+              <span class="value" id="sampler-silence-threshold-value">0.01</span>
+            </div>
+            <div class="control">
+              <label for="sampler-min-silence">Min silence duration (ms)</label>
+              <input id="sampler-min-silence" type="number" min="0" max="1000" step="1" value="20" />
+            </div>
+            <div class="row">
+              <label class="field" for="sprite-source">
+                <span class="field-label">Sprite source</span>
+                <select id="sprite-source">
+                  <option value="bundled">Bundled</option>
+                  <option value="custom">Custom</option>
+                </select>
+              </label>
+              <label class="field" for="sprite-mode">
+                <span class="field-label">Sprite map mode</span>
+                <select id="sprite-mode">
+                  <option value="json">SpriteMap JSON</option>
+                  <option value="labels">Phoneme labels</option>
+                </select>
+              </label>
+            </div>
+            <label class="field" for="sprite-labels">Sprite labels</label>
+            <input id="sprite-labels" type="text" placeholder="a, b, c" />
+            <div class="row">
+              <label class="field">
+                <span class="field-label">Custom sprite WAV</span>
+                <input id="custom-wav" type="file" accept="audio/*" />
+              </label>
+              <label class="field">
+                <span class="field-label">Custom sprite map JSON</span>
+                <input id="custom-map" type="file" accept="application/json" />
+              </label>
+            </div>
+          </section>
+        </div>
+      </details>
+    </div>
+  </body>
+</html>
